@@ -59,8 +59,8 @@ button:disabled {
 /* media query tablet or smaller */
 @media screen and (max-width: 1000px) {
   .container {
-    background:coral;
-    background-position: center left;
+    /* background:coral; */
+    background-position: -10px 0px;  
     background-size:contain;
     left: 0%;
 
