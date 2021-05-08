@@ -59,8 +59,10 @@ button:disabled {
 /* media query tablet or smaller */
 @media screen and (max-width: 1000px) {
   .container {
+    background:coral;
     background-position: center left;
-    background-size: cover;
+    background-size:contain;
+    left: 0%;
 
   }
 
@@ -68,3 +70,18 @@ button:disabled {
     box-shadow: 5px 5px 30px 20px rgba(0, 0, 0, 0.2);
   }
 }
+
+/* @media screen and (max-width: 376px) {
+  .container {
+    background-position:left;
+    background-size:auto;
+
+   
+
+  }
+
+  button {
+    box-shadow: 5px 5px 30px 20px rgba(0, 0, 0, 0.2);
+  }
+} */
+
