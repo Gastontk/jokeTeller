@@ -57,6 +57,8 @@ const VoiceRSS = {
         t.onreadystatechange = function() {
             if (4 == t.readyState && 200 == t.status) {
                 if (0 == t.responseText.indexOf("ERROR"))
+                    // console.log('below is speech api error')
+
                     throw t.responseText;
 
     // Audio does not autoplay. So im going to create the audio element manually and insert it.

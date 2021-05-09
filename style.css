@@ -60,7 +60,7 @@ button:disabled {
 @media screen and (max-width: 1000px) {
   .container {
     /* background:coral; */
-    background-position: -10px 0px;  
+    /* background-position: -10px 0px;   */
     background-size:contain;
     left: 0%;
 
