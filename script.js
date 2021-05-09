@@ -152,7 +152,7 @@ function setAttributes(element, attributes){
      VoiceRSS.speech({
         key: voicerssKey,
         src : setup,
-        hl: 'en-au',
+        hl: 'en-us',
         r: 0, 
         c: 'mp3',
         f:'44khz_16bit_stereo',
@@ -202,6 +202,37 @@ async function getJoke(){
     
 };
 // getVoice()
-getJoke()
+ async function checkIP(){
+     console.log('checking ip');
+    // fetch('https://ipapi.co/'
+    // ).then((res)=>{
+    //   let ip =res
+    //   console.log(res);
+    // })
+    // var https = require('https');
 
+            fetch('https://ipapi.co/json/')
+            .then(data=>{
+       return data.json()})
+       .then(res=>{
+           console.log(res);
+           getJoke()
+       });
+        // var body = '';
+        // console.log('line below starts the check')
+        // // res.on('data', function(data){
+        // //     body += data;
+        // // });
+        // // res.on('end', function(){
+        // //     console.log('body of ip api response is: ', body);
+        // // });
+        // })
+    
 
+}
+        
+    
+   
+
+checkIP()
+// getJoke()
