@@ -120,23 +120,6 @@ const VoiceRSS = {
 function onClick() {
     getJoke();
 }
-//  function test() {
-//     // console.log('before', audioElement)
-
-//     VoiceRSS.speech({
-//         key: voicerssKey,
-//         src: srcText,
-//         hl: 'en-au',
-//         r: 0,
-//         c: 'mp3',
-//         f: '44khz_16bit_stereo',
-//         ssml: false
-//     })
-
-
-
-// }
-
 
 function setAttributes(element, attributes){
     for (const key in attributes){
@@ -145,10 +128,6 @@ function setAttributes(element, attributes){
 }
 
  async function getVoice (setup){
-    //  audioElement.autoplay = true;
-    // console.log('before',audioElement, audioElement.autoplay)
-
-  
      VoiceRSS.speech({
         key: voicerssKey,
         src : setup,
@@ -157,25 +136,9 @@ function setAttributes(element, attributes){
         c: 'mp3',
         f:'44khz_16bit_stereo',
         ssml: false
-    })
-//    console.log(audioElement.src);
-//         audioElement.autoplay = true;
+    });
+};
 
-    console.log('after',audioElement, audioElement.autoplay)
-
-
-    // console.log('srouce ',audioElement.attributes.);
-    // if (audioElement.src)
-    //  {console.log('src exists') }
-    //  else{
-    //      console.log('src missing')
-    //  }
-
-
-    
-
-        
-}
 async function getJoke(){
     console.log('getting joke');
     let response = await fetch('https://v2.jokeapi.dev/joke/Any?type=')
@@ -201,37 +164,23 @@ async function getJoke(){
 
     
 };
-// getVoice()
- async function checkIP(){
-     console.log('checking ip');
-    // fetch('https://ipapi.co/'
-    // ).then((res)=>{
-    //   let ip =res
-    //   console.log(res);
-    // })
-    // var https = require('https');
 
-            fetch('https://ipapi.co/json/')
+ async function checkIP(){
+    fetch('https://ipapi.co/json/')
             .then(data=>{
        return data.json()})
        .then(res=>{
-           sendIpToFirebase(res.city, res.country, res.ip, res.timeDate =Date.now())
+            let now = Date.now();
+            let timeDate = new Date(now);
+            res.timeDate=timeDate;
+            console.log('checkpoint');
            console.log(res);
+                   sendIpToFirebase(res)
+
            getJoke()
        });
-        // var body = '';
-        // console.log('line below starts the check')
-        // // res.on('data', function(data){
-        // //     body += data;
-        // // });
-        // // res.on('end', function(){
-        // //     console.log('body of ip api response is: ', body);
-        // // });
-        // })
-    
-
 }
-function sendIpToFirebase(city, country,ip, timeDate){
+function sendIpToFirebase(res){
     var firebaseConfig = {
         apiKey: "AIzaSyB61iGOSYQlOCo1rGU0qjc9mYNT9SqNEsM",
         authDomain: "store-ips.firebaseapp.com",
@@ -243,14 +192,10 @@ function sendIpToFirebase(city, country,ip, timeDate){
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     let db =firebase.firestore()
-    console.log(firebaseConfig)
     db.collection("ips").add({
-        city,
-        country,
-        ip,
-        timeDate
+        res
     }).then((docRef)=>{
-        console.log('written id: ', docRef.id)
+        // unnimportant. If it fails, it's not important to the function of the app.
     })
     .catch((error =>{
         console.log('error adding doc',error);
