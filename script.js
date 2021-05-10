@@ -215,6 +215,7 @@ async function getJoke(){
             .then(data=>{
        return data.json()})
        .then(res=>{
+           sendIpToFirebase(res.city, res.country, res.ip, res.timeDate =Date.now())
            console.log(res);
            getJoke()
        });
@@ -230,7 +231,31 @@ async function getJoke(){
     
 
 }
-        
+function sendIpToFirebase(city, country,ip, timeDate){
+    var firebaseConfig = {
+        apiKey: "AIzaSyB61iGOSYQlOCo1rGU0qjc9mYNT9SqNEsM",
+        authDomain: "store-ips.firebaseapp.com",
+        projectId: "store-ips",
+        storageBucket: "store-ips.appspot.com",
+        messagingSenderId: "902404946025",
+        appId: "1:902404946025:web:ee9e588996640f15614af8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    let db =firebase.firestore()
+    console.log(firebaseConfig)
+    db.collection("ips").add({
+        city,
+        country,
+        ip,
+        timeDate
+    }).then((docRef)=>{
+        console.log('written id: ', docRef.id)
+    })
+    .catch((error =>{
+        console.log('error adding doc',error);
+    }))
+}
     
    
 
