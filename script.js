@@ -1,6 +1,7 @@
 const button = document.getElementById('button');
 let audioElement = document.createElement('audio');
 const container = document.getElementById('container');
+const warningElement = document.getElementById('warning-container')
 
 let jokeTextElement = document.getElementById('joke-text')
 const voicerssKey ='69c03f9d48494f86ba442cb959c2386b';
@@ -184,4 +185,8 @@ function sendIpToFirebase(res){
     
    
 
-checkIP();
+
+setTimeout(()=>{
+    checkIP();
+    warningElement.hidden = true;
+}, 8000);

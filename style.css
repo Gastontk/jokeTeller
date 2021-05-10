@@ -8,6 +8,22 @@ body {
   background: #45badd;
 }
 
+.warning-container {
+  position:fixed;
+  align-items: center;
+  /* justify-content: space-around; */
+  margin:0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  
+
+}
+#warning-text {
+  padding:20%;
+  color: white;
+}
 
 .container {
   height: 100vh;
