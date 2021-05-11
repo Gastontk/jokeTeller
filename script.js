@@ -185,8 +185,8 @@ function sendIpToFirebase(res){
     
    
 
-
+checkIP();
 setTimeout(()=>{
-    checkIP();
+    
     warningElement.hidden = true;
 }, 8000);
